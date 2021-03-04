@@ -2,7 +2,9 @@
 Niste cerinte introductive super simple, in afara de prima care-i autista
 
 ## 1. B64 encoding
-Cica e codat cu base64, da' nu-i sau nu-i nimic relevant daca il decodez :(.
+Flag: `FLAG{so_many_64s}`
+
+Fisierul e criptat **de mai multe** ori (16) cu base 64... 
 
 
 ## 2. EXIF
@@ -43,4 +45,13 @@ Trebuie instalata `libcurl4-gnutls-dev` si linkat cu `-lcurl`.
 
 
 ## 8. Compilare statica
-O mizerie.
+O mizerie. Cumva chiar chiar daca se foloseste parametrul `-static`, binarul
+e tot dinamic :(.
+
+
+## 9. Capturare de trafic cu `tcpdump`
+Se caputreaza tot traficul de pe retea intr-un fisier, folosind comanda:
+```bash
+sudo tcpdump -i enp0s31f6 -Z teo -w traffic.log
+```
+data **pe un sistem `ext`, nu `ntfs`!**
