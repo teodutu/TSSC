@@ -45,8 +45,9 @@ Trebuie instalata `libcurl4-gnutls-dev` si linkat cu `-lcurl`.
 
 
 ## 8. Compilare statica
-O mizerie. Cumva chiar chiar daca se foloseste parametrul `-static`, binarul
-e tot dinamic :(.
+O mizerie. De avut in vedere ca **doar `libcurl`** e linkat static. Daca rulam
+`ldd` pe `simple` si pe `simple_static`, obervam ca la compilarea statica
+dispare `libcurl` din lista de biblioteci ale lui `simple_static`.
 
 
 ## 9. Capturare de trafic cu `tcpdump`
@@ -55,3 +56,14 @@ Se caputreaza tot traficul de pe retea intr-un fisier, folosind comanda:
 sudo tcpdump -i enp0s31f6 -Z teo -w traffic.log
 ```
 data **pe un sistem `ext`, nu `ntfs`!**
+
+
+## 10. Iptables
+Se scrie o regula de `iptables` care logeaza tot traficul generat de `curl`:
+```bash
+sudo iptables -I INPUT -p tcp -j LOG --log-level 4 --log-prefix "[TSSC:lab1]"
+```
+Logurile se pot vedea astfel
+```
+sudo tail -f /var/log/kern.log
+```

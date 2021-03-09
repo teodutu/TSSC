@@ -1,13 +1,12 @@
 CC = gcc
-LDLIBS = -lcurl
-LDLIBS_STATIC = `curl-config --static-libs` -lpthread
+CFLAGS= `curl-config --cflags`
+LDLIBS = `curl-config --libs`
 
-ELF = simple
+LDLIBS_static = `curl-config --static-libs` -lpthread
+LDFLAGS_static =-L/lib/x86_64-linux-gnu
 
-build: $(ELF) $(ELF)_static
-
-$(ELF)_static: $(ELF).c
-	$(CC) -static $^ -o $@ $(LDLIBS_STATIC)
+simple_static: simple.c
+	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS_static) $(LDLIBS_static)
 
 clean:
-	rm -f $(ELF) $(ELF)_static
+	rm -r simple_static simple
