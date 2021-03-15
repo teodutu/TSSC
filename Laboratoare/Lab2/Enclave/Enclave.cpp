@@ -8,7 +8,6 @@
 #include <sgx_tseal.h>
 
 #define SECRET_FILE "enclave_secret"
-#define SGX_RULLZ "SGX_RULLZ"
 
 void printf(const char *fmt, ...)
 {
@@ -45,16 +44,24 @@ void seal_secret()
 	// Add code here to seal "SGX_RULLZ".
 	// TODO 4: Generate random string to seal.
 	sgx_status_t status;
-	uint32_t cipher_len = sgx_calc_sealed_data_size(0, sizeof(SGX_RULLZ));
-	sgx_sealed_data_t* sealed = (sgx_sealed_data_t*)malloc(cipher_len);
+	unsigned char buf[64];
+	uint32_t cipher_len = sgx_calc_sealed_data_size(0, sizeof(buf));
+	sgx_sealed_data_t* sealed;
+	size_t i;
+
+	status = sgx_read_rand(buf, sizeof(buf));
+	if (SGX_SUCCESS != status)
+		return;
+
+	sealed = (sgx_sealed_data_t*)malloc(cipher_len);
 	if (!sealed)
 		return;
 
 	status = sgx_seal_data(
 		0,
 		NULL,
-		sizeof(SGX_RULLZ),
-		(uint8_t*)SGX_RULLZ,
+		sizeof(buf),
+		buf,
 		cipher_len,
 		sealed
 	);
@@ -63,6 +70,11 @@ void seal_secret()
 
 	ocall_write_file(SECRET_FILE, (char *)sealed, cipher_len);
 	free(sealed);
+
+	printf("Encrypted text: ");
+	for (i = 0; i != sizeof(buf); ++i)
+		printf("0x%X ", buf[i] & 0xff);
+	printf("\n");
 }
 
 
@@ -72,7 +84,7 @@ void unseal_secret()
 	// Add code here
 	static char encrypted[1024], decrypted[1024];
 	sgx_status_t status;
-	uint32_t len;
+	uint32_t len, i;
 
 	ocall_read_file(SECRET_FILE, encrypted, sizeof(encrypted));
 
@@ -86,5 +98,8 @@ void unseal_secret()
 	if (SGX_SUCCESS != status)
 		return;
 	
-	printf("Decrypted text = %s\n", decrypted);
+	printf("Decrypted text: ");
+	for (i = 0; i != len; ++i)
+		printf("0x%X ", decrypted[i] & 0xff);
+	printf("\n");
 }

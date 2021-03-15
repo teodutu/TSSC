@@ -12,7 +12,7 @@ sgx_enclave_id_t global_eid;
 /* OCall implementations */
 void ocall_print(const char* str)
 {
-	printf("%s\n", str);
+	printf("%s", str);
 }
 
 void ocall_write_file(const char* filename, const char* buf, size_t buf_len)
@@ -101,7 +101,7 @@ int main(void)
 
 	ocall_write_file("gigel.txt", "valoare!\n", 10);
 	ocall_read_file("gigel.txt", buf, 10);
-	printf("file contains: %s", buf);
+	printf("gigel.txt contains: %s", buf);
 
 	/* TODO 3, TODO 4: Uncomment sealing/unsealing calls */ 
 	status = seal_secret(global_eid);
