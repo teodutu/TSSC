@@ -1,0 +1,20 @@
+enclave {
+	trusted {
+		/* define ECALLs here. */
+		public int get_sum(int a, int b);
+
+		/* TODO 1, TODO 3, TODO 5: Add ecalls */
+		public unsigned int generate_random_number(void);
+		public void seal_secret(void);
+		public void unseal_secret(void);
+	};
+
+	untrusted {
+		/* define OCALLs here. */
+		void ocall_print([in, string]const char* str);
+
+		/* TODO 2: Add ocalls */
+		void ocall_write_file([user_check]const char* filename, [in, size=buf_len]const char* buf, size_t buf_len);
+		void ocall_read_file([user_check]const char* filename, [out, size=buf_len]char* buf, size_t buf_len);
+	};
+};
