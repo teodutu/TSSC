@@ -19,3 +19,10 @@ si decriptat.
 ### Laborator 3 - Criptografie
 Se experimenteaza metode de decriptarea a *AES*, *RSA*, *OTP* etc folosind
 diverse informatii fie despre cheii, fie despre mesajele transmise.
+
+
+## Teme
+### Tema 1
+Tema contine 3 cerinte: o mizerie de cripto care pana la urma a fost relativ
+interesanta, un exploit foarte misto al `SETUID` si un buffer overflow banal, ca
+la IOCLA.

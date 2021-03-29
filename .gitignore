@@ -132,3 +132,6 @@ dmypy.json
 # Miscellaneous
 linux-sgx/
 .vscode/
+
+# Binary files
+*.zip
