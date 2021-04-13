@@ -19,3 +19,18 @@ si decriptat.
 ### Laborator 3 - Criptografie
 Se experimenteaza metode de decriptarea a *AES*, *RSA*, *OTP* etc folosind
 diverse informatii fie despre cheii, fie despre mesajele transmise.
+
+### Laborator 4 - Controlul accesului
+Facut doar pe fep pentru ca era nevoie de creat utilizatori, grupuri, basini.
+Se folosesc perimisiuni (printre care si SETUID si SETGIT) + ACL-uri ca sa se
+gestioneze accesul unor utilizatori la diverse directoare si fisiere.
+
+### Laborator 5 - Application security
+Se face un buffer overflow chior prin care se apeleaza o functie cu un parametru
+suprascriind EIP-ul.
+
+### Laborator 6 - OS Security
+Se apeleaza un shellcode si se creeaza un mic DOS pentru un server de apache2
+care ruleaza **intr-un container de docker in plm...**. Interesant e ca serverul
+omoara conexiunea catre scriptul care ruleaza exploitul dupa ceva timp de cand
+i se umple memoria, deci nu-i chiar asa prost.
