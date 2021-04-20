@@ -1,0 +1,18 @@
+# Casino
+
+There's a new casino in the [virtual] town, we've heard it hosts plenty of bitcoins.
+
+Some say it is rigged.
+We managed to "fetch" the binary code of the server, but can't figure it out.
+
+Can you check it out? We'll make it 50/50 ;)
+
+Should you try your solution, the casino server's address is
+`isc2021.root.sx:10003`.
+
+
+### Hints:
+
+  - after succeeding locally, make sure to run your exploit on the server!
+  - use netcat with input piping; e.g. `echo "input" | nc <server> <port>`;
+  - remember the x86 (32-bit) calling convention ;)

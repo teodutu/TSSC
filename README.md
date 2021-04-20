@@ -34,3 +34,11 @@ Se apeleaza un shellcode si se creeaza un mic DOS pentru un server de apache2
 care ruleaza **intr-un container de docker in plm...**. Interesant e ca serverul
 omoara conexiunea catre scriptul care ruleaza exploitul dupa ceva timp de cand
 i se umple memoria, deci nu-i chiar asa prost.
+
+
+
+## Teme
+### Tema 1
+Tema contine 3 cerinte: o mizerie de cripto care pana la urma a fost relativ
+interesanta, un exploit foarte misto al `SETUID` si un buffer overflow banal, ca
+la IOCLA.
