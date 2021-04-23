@@ -25,7 +25,7 @@ Facut doar pe fep pentru ca era nevoie de creat utilizatori, grupuri, basini.
 Se folosesc perimisiuni (printre care si SETUID si SETGIT) + ACL-uri ca sa se
 gestioneze accesul unor utilizatori la diverse directoare si fisiere.
 
-### Laborator 5 - Application security
+### Laborator 5 - Application Security
 Se face un buffer overflow chior prin care se apeleaza o functie cu un parametru
 suprascriind EIP-ul.
 
@@ -35,6 +35,9 @@ care ruleaza **intr-un container de docker in plm...**. Interesant e ca serverul
 omoara conexiunea catre scriptul care ruleaza exploitul dupa ceva timp de cand
 i se umple memoria, deci nu-i chiar asa prost.
 
+### Laborator 7 - Netwoek Security
+Rahaturi cu `iptables` si un atac *Man in the Middle*. Toate atacurile se fac pe
+dockere. Cam plictisitor labul asta.
 
 
 ## Teme
