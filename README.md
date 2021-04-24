@@ -39,6 +39,10 @@ i se umple memoria, deci nu-i chiar asa prost.
 Rahaturi cu `iptables` si un atac *Man in the Middle*. Toate atacurile se fac pe
 dockere. Cam plictisitor labul asta.
 
+### Laborator 8 - Web Security
+In sfarsit un lab mai ok ca se fac atacuri de*SQL Injection*. In rest tot
+mizerii. Si, bineinteles, labul explicat ca un cur.
+
 
 ## Teme
 ### Tema 1
