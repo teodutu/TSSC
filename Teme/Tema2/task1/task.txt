@@ -1,0 +1,24 @@
+# Packet capture
+
+Our network admins have recorded some unauthorized network traffic and we
+suspect that one of our servers was compromised.
+
+You have the 'traffic.pcap' file attached. Can you check it for any unusual
+data? Such as PRIVATE RSA keys, which must NEVER leave the server in clear
+text.
+
+If you found any, can you please check if it works against our secure server,
+secure@isc2021.root.sx ?
+
+If you manage to do it, please send the server's flag back to us.
+
+
+### Notes / Hints: 
+
+  - you can use Wireshark, a GUI tool for network packet capture that can
+    also open .pcap files;
+  - you will probably see encrypted protocols like HTTPS and SSH. Since you
+    don't have the key to decrypt the traffic, you can safely ignore them;
+  - if you found the key but it's split into multiple packets, check the
+    Follow TCP Stream feature!
+
