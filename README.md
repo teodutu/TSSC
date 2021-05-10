@@ -43,6 +43,10 @@ dockere. Cam plictisitor labul asta.
 In sfarsit un lab mai ok ca se fac atacuri de*SQL Injection*. In rest tot
 mizerii. Si, bineinteles, labul explicat ca un cur.
 
+### Laborator 9 - Forensics
+CTF-uri pe teme generice, de obicei fisiere cu diverse formate. Printre cele mai
+misto laburi.
+
 
 ## Teme
 ### Tema 1
