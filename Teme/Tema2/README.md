@@ -40,8 +40,10 @@ Initial, am incercat sa-i dau *friend request* bossului. Degeaba. Iar m-am uitat
 in codul site-ului si apoi in `main.js` si am observat ca e destul sa apelez eu,
 de pe profilul meu, `acceptFriend(boss_id)` ca bossul sa imi accepte si el
 cererea. Am incercat sa apelez `acceptFriend(theboss)` si n-a mers. Asa ca am
-sperat ca poate id-urile ar putea fi ca intr-o baza de date. Am incercat 0 si 1,
-iar 1 a mers, iar pe profilul bossului am gasit flagul.
+sperat ca poate id-urile ar putea fi ca intr-o baza de date, ceea ce e adevarat,
+id-ul bossului fiind prezent in sursa *HTML* a paginii
+(`<div class="box profile-view" data-user-id="1">`) si e 1. Dupa ce am apelat
+`acceptFriend(1)`, am vazut flagul pe profilul bossului.
 
 
 ### Al treilea flag
@@ -129,3 +131,26 @@ Cu ultima cerere am obtinut chiar flagul de mai sus:
 ```
 ' union select 1, 2, zaflag, 4, 5, 6, 7, 8 from web_5371.flags9174 -- x
 ```
+
+
+## Al cincilea flag
+```
+SpeishFlag{5kKCDfEKfrH0z9Agrx1Op9MXJ459vswP}
+```
+
+Dezarhivand intreaga arhiva `backup.tar.gz`, am descoperit in scriptul
+`controller/inside/Post.php` ca atunci cand trimit o poza, aceasta trebuie sa
+aiba *mime-type-ul* `jpeg`, `png` sau `gif`. Am mai vazut si ca uploadurile se
+duc in `/var/www/userupload/posts`. In `index.php`-ul din radacina arhivei, am
+observat ca se alge controllerul folosit prin parametrul `p` al cererii `GET`.
+In plus, extensia numelui pozei trebuie sa fie `.php`. y u do dis? Si din cauza
+ca `$curController = ucfirst(strtolower($component));`, numele "pozei" trebuie
+sa inceapa cu majuscula.
+
+Asadar, ca sa pot sa rulez *PHP* din poza, trebuie sa o incarc (adica sa incarc
+un cod *PHP* precedat de un header de poza), iar apoi sa dau un `GET` in care
+parametrul `p` va fi calea catre poza incarcata anterior. Astfel, serverul va
+executa codul din poza.
+
+Cum cel mai scurt header este cel de *GIF* (pronuntat ca in romana, da?), am
+ales formatul asta pentru poza. Fisierul incarcat e `Picture.php`.
