@@ -35,7 +35,7 @@ care ruleaza **intr-un container de docker in plm...**. Interesant e ca serverul
 omoara conexiunea catre scriptul care ruleaza exploitul dupa ceva timp de cand
 i se umple memoria, deci nu-i chiar asa prost.
 
-### Laborator 7 - Netwoek Security
+### Laborator 7 - Network Security
 Rahaturi cu `iptables` si un atac *Man in the Middle*. Toate atacurile se fac pe
 dockere. Cam plictisitor labul asta.
 
@@ -46,6 +46,15 @@ mizerii. Si, bineinteles, labul explicat ca un cur.
 ### Laborator 9 - Forensics
 CTF-uri pe teme generice, de obicei fisiere cu diverse formate. Printre cele mai
 misto laburi.
+
+## Laborator 10 - PGP
+Comenzi simple de *GPG*: creare, semnare de chei, criptare si semnare de mesaje,
+precum si decriptare si verificare semnaturi. Facut pe *OpenStack*.
+
+## Laborator 11 - ML Security
+Se foloseste un *ResNet 18* pentru a genera un input care sa fie clasificat
+drept semnul rutier *STOP*. Un lab usurel, si clar mai interesant decat ala de
+GPG.
 
 
 ## Teme
