@@ -1,0 +1,99 @@
+# Website Hacker
+
+Dear mighty doge. Hoping you can help me with a problem:
+
+I caught my cat pouncing near my laptop. When I checked it out, my browser's
+history had this new website, "Catzbook", a social network for "3v1l" cats :( 
+If this is true, we must find out what those furry pets are planning, nothing
+good will come out of this...
+
+Your tasks are the following (each will result in a hidden flag):
+
+ - discover a way to get in (create an account, maybe?);
+ - try to become friends with the website's owner / admin to be able see any
+   important posts (try an XSS & [fake] social engineering attack?);
+ - can you find the website's source code? you may find some hidden secrets
+   within;
+ - discover an SQL injection backdoor and exploit it (the website appears
+   protected against this type of attacks, but no system is prepared against
+   you!);
+ - finally, try to obtain execution rights on the server and find out any
+   sensitive credentials (search for them inside .php files).
+
+It's hosted on some kind of internal network, but I saved its private key and
+will give you the script used to access it (just follow the instructions below).
+
+Good luck, 31337 one!
+
+
+Access instructions:
+====================
+
+You will use SSH Tunnel Forwarding to access the website using
+http://localhost:8080 from your machine.
+
+The server spawns an individual Docker container for each SSH user session and
+allocates a random port to use for forwarding, so we will use the OpenSSH client
+connection multiplexing feature to keep the session open through the process:
+
+- establish a persistent SSH connection to the task server; the server will
+  allocate dedicated resources (i.e., random container port) for your client;
+- ask the server to tell you your random web port number;
+- tell SSH to forward the port previously discovered as :8080 on your machine;
+- call the final script to start the web server instance; from now on, keep the
+  terminal up and you will be able to access the website using a browser on your
+  local machine;
+- when you close the connection, the server will clean up all resources
+  allocated for you (so WARNING: everything you posted / modified on the website
+  is lost, you will need to repeat some steps again, so make sure to record
+  them e.g. in a readme; the flags are static and do not change between your
+  personalized instances); [hopefully], there is no time limit for the
+  connection, just be wary of Internet connection drops :(
+
+Scripts are provided (bash and powershell), though they might need minor tweaks.
+
+**Note for Windows users**: OpenSSH for Windows doesn't support control master /
+session multiplexing. Try to use WSL (Windows Subsystem for Linux) if possible.
+Otherwise, install Putty and Plink (command line client, bundled if you use the
+Putty installer) and use the provided Powershell script (`connect-putty.ps1`,
+read the script's code).
+
+For Putty, don't forget to convert the private SSH key to PPK format (it doesn't
+speak PEM). Ofc, Google it!
+
+For modern, POSIX-compatible OSes (and WSL, which is also POSIX :D), the bash
+script should work out of the box.
+
+
+Notes / hints:
+==============
+
+ - for this task, you have to find a total of 5 flags, each as result of
+   completing one of the tasks mentioned above ;)
+ - note: the XSS response is simulated (using a deamon listening for posts
+   containing `<script>`s :D), you just need to XSS post a valid script using
+   a specific function (+ the correct user ID argument) to accomplish the
+   "making friends" subtask, check out the internal pages' javascript code for
+   details! after the attack is done, please wait for 10-20 seconds for the user
+   interaction to be simulated (you might want to check the docker console).
+ - check out the boss' posts! they usually contain important clues;
+ - for SQL Injection, most fields are not vulnerable, so find out the proper
+   parameter to exploit!
+ - the last and vulnerability is a complex file upload + directory traversal +
+   remote PHP code execution bug that will allow you to fetch the last flag;
+   hints for this:
+    * your image must be valid for server MIME checks to pass!
+    * server won't execute any .phps inside the photo upload directory! work
+      around this;
+    * the multipart/form-data file name traversal DOES NOT work (PHP
+      automatically strips any path prefix from the user agent provided name);
+    * the architecture of the application is a MVC (Model - View - Controller)
+      variant; when you see a specific error, figure out a way to exploit it ;)
+    * you must craft PHP code to read the file containing the database
+      credentials (with the flag, ofc) and show it to you somehow :P
+
+Also, please stop your hacking after obtaining all flags (i.e., container
+execution rights). And NO DENIAL OF SERVICE please!
+
+Remember: 5 flags, 0.15p each (totalling 75% of the assignment score)!
+
